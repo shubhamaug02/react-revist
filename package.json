@@ -2,8 +2,9 @@
   "name": "ignite-the-app",
   "version": "1.0.0",
   "description": "Creating the React App from scratch",
-  "main": "App.js",
   "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "repository": {
@@ -17,6 +18,8 @@
   },
   "homepage": "https://github.com/NSshubham/React-zero-to-hero.git)#readme",
   "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "parcel": "^2.8.2",
     "process": "^0.11.10"
   },

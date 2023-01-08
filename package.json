@@ -1,0 +1,30 @@
+{
+  "name": "ignite-the-app",
+  "version": "1.0.0",
+  "description": "Creating the React App from scratch",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/NSshubham/React-zero-to-hero.git"
+  },
+  "author": "Shubham Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NSshubham/React-zero-to-hero.git/issues"
+  },
+  "homepage": "https://github.com/NSshubham/React-zero-to-hero.git)#readme",
+  "devDependencies": {
+    "parcel": "^2.8.2",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist": [
+    "last 2 chrome versions"
+  ]
+}

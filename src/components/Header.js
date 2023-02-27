@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const Title = () => (<a href="/">
     <img 
         className= "logo"
@@ -5,8 +7,8 @@ const Title = () => (<a href="/">
         src="https://t4.ftcdn.net/jpg/02/75/70/03/360_F_275700347_09reCCwb7JBxTKiYQXsyri4riMKaHbj8.jpg" />
     </a>);
 
-
 export default HeaderComponent = () => {
+    const [isLoggedIn,setIsLoggedIn] = useState(false);
     return (<div className="header">
         <Title />
         <div className='nav-items'>
@@ -15,6 +17,7 @@ export default HeaderComponent = () => {
                 <li>About</li>
                 <li>Contact</li>
                 <li>Cart</li>
+                {isLoggedIn ? <button onClick={() => setIsLoggedIn(false)}>Logout</button>: <button onClick={() => setIsLoggedIn(true)}>Login</button>}
             </ul>
         </div>
     </div>);

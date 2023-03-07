@@ -2,6 +2,7 @@ import {restaurantList} from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState}  from "react";
 import Shimmer from "./Shimmer";
+import {Link} from "react-router-dom";
 
 function filterData(searchText, allRestaurants){
   return allRestaurants.filter((restaurant) => restaurant?.data?.name?.toLowerCase().includes(searchText?.toLowerCase()));
@@ -11,7 +12,7 @@ function filterData(searchText, allRestaurants){
 const Body = () => {
     //const searchTxt = "Dominos"; // when used it's a hardcoded value. won't get updated on change  
     const [searchText,setSearchText] = useState("");
-    const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+    const [filteredRestaurants, setFilteredRestaurants] = useState();
     const [allRestaurants, setAllRestaurants] = useState([]);
     //{RestaurantCard(restaurantList[0].data)} // will not be rendered
 
@@ -63,7 +64,9 @@ const Body = () => {
             {/* {RestaurantCard(restaurantList[0].data)} */}
             {
               filteredRestaurants.map(restaurant => {
-                return <RestaurantCard {...restaurant.data} key={restaurant.data.id}/>
+                return <Link to={"/restaurant/" + restaurant.data.id} key={restaurant.data.id}>
+                  <RestaurantCard {...restaurant.data} />
+                </Link>
               })
             }
             {/* <RestaurantCard {...restaurantList[0].data}/> */}

@@ -1,10 +1,13 @@
 import { useState } from "react";
+import Logo from "../assets/img/Logo.png";
+import {Link} from "react-router-dom";
+
 
 const Title = () => (<a href="/">
     <img 
         className= "logo"
         alt="logo"
-        src="https://t4.ftcdn.net/jpg/02/75/70/03/360_F_275700347_09reCCwb7JBxTKiYQXsyri4riMKaHbj8.jpg" />
+        src={Logo} />
     </a>);
 
 export default HeaderComponent = () => {
@@ -13,9 +16,9 @@ export default HeaderComponent = () => {
         <Title />
         <div className='nav-items'>
             <ul>
-                <li>Name</li>
-                <li>About</li>
-                <li>Contact</li>
+                <li><Link to="/">Home</Link></li> 
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/contact">Contact</Link></li>
                 <li>Cart</li>
                 {isLoggedIn ? <button onClick={() => setIsLoggedIn(false)}>Logout</button>: <button onClick={() => setIsLoggedIn(true)}>Login</button>}
             </ul>

@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Logo from "../assets/img/Logo.png";
 import {Link} from "react-router-dom";
+import UserContext from "../utils/UserContext";
+import NewContext from "../utils/NewContext";
 
 
 const Title = () => (<a href="/">
@@ -12,6 +14,8 @@ const Title = () => (<a href="/">
 
 export default HeaderComponent = () => {
     const [isLoggedIn,setIsLoggedIn] = useState(false);
+    const {user} = useContext(UserContext);
+    const {name} = useContext(NewContext);
     return (<div className="flex justify-between bg-green-100 shadow-lg sm:bg-blue-50 md:bg-yellow-50">
         <Title />
         <div className='nav-items'>
@@ -23,6 +27,8 @@ export default HeaderComponent = () => {
                 <li className="px-2">Cart</li>
             </ul>
         </div>
+        <span className="p-10 font-bold text-red-900">{user.name}</span>
+        <span>{name}</span>
         <div className="py-10">
             {isLoggedIn ? <button onClick={() => setIsLoggedIn(false)}>Logout</button>: <button onClick={() => setIsLoggedIn(true)}>Login</button>}
         </div>

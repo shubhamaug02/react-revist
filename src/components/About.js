@@ -2,6 +2,8 @@ import {Outlet} from "react-router-dom";
 import {Component} from "react";
 import ProfileFunctionalComponent from "./Profile";
 import Profile from "./ProfileClass";
+import UserContext from "../utils/UserContext";
+import NewContext from "../utils/NewContext";
 
 class About extends Component{
     constructor(){
@@ -18,6 +20,16 @@ class About extends Component{
       return(
         <>
           <h1>About Us</h1>
+          <UserContext.Consumer>
+            {(value) => 
+              <h4 className="font-bold text-xl p-2">{value.user.name} - {value.user.email}</h4>
+            }
+          </UserContext.Consumer>
+          <NewContext.Consumer>
+            { value => 
+                <h4>from NewContext {value.name}</h4>
+            }
+          </NewContext.Consumer>
           <h2>Food Villa is a one centre for all types of food and serving since 2000.</h2>
           {/* {<Outlet /> } */}
           {/* <Profile name={"First Child"} xyz="abc"/> */}

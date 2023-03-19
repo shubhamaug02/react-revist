@@ -1,12 +1,13 @@
 import {restaurantList} from "../constants";
 import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState}  from "react";
+import { useEffect, useState, useContext}  from "react";
 import Shimmer from "./Shimmer";
 import {Link} from "react-router-dom";
 import {filterData} from "../utils/helper";
 import useRestaurants from "../utils/useRestaurants";
 import useOnline from "../utils/useOnline";
-
+import UserContext from "../utils/UserContext";
+ 
 const Body = () => {
     //const searchTxt = "Dominos"; // when used it's a hardcoded value. won't get updated on change  
     const [searchText,setSearchText] = useState("");
@@ -23,6 +24,7 @@ const Body = () => {
     if(filteredRestaurants?.length === 0) 
       return <h1>No Restaurants match your Filter</h1>;
 
+    const {user,setUser} = useContext(UserContext);
 
     return (allRestaurants.length === 0 ? <Shimmer /> :
        <>
@@ -44,6 +46,18 @@ const Body = () => {
             }}>
             Search
           </button>
+          <input className="mx-2" value={user.name} onChange={e => {
+              setUser({
+              ...user,
+              name: e.target.value
+            })
+          }} />
+          <input value={user.email} onChange={e => {
+              setUser({
+              ...user,
+              email: e.target.value
+            })
+          }} />
         </div>
          <div className="restaurant-list flex flex-wrap">
             {/* {RestaurantCard(restaurantList[0].data)} */}

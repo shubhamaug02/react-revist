@@ -43,11 +43,11 @@ const RestaurantMenu = () => {
                 itemCards.map(item => addFoodItem(item?.card?.info))}</li>
                 </ul> */}
 
-                <ul>{restaurant?.cards[2].groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.
+                <ul data-testid="menu">{restaurant?.cards[2].groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.
                 itemCards?.map((itemObj,index)=> 
                     <li key={index}>
                         {itemObj?.card?.info?.name} -{" "}
-                        <button className="p-1 bg-green-50" onClick={() => addFoodItem(itemObj?.card?.info)}>Add</button>
+                        <button data-testid="add-btn" className="p-1 bg-green-50" onClick={() => addFoodItem(itemObj?.card?.info)}>Add</button>
                     </li>)}
                 </ul>
             </div>

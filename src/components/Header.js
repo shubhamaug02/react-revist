@@ -5,17 +5,20 @@ import UserContext from "../utils/UserContext";
 import NewContext from "../utils/NewContext";
 import {useSelector} from "react-redux";
 import store from "../utils/store";
+import useOnline from "../utils/useOnline";
 
 
 const Title = () => (<a href="/">
     <img 
         className= "h-28 p-2"
+        data-testid="logo"
         alt="logo"
         src={Logo} />
     </a>);
 
-export default HeaderComponent = () => {
+const HeaderComponent = () => {
     const [isLoggedIn,setIsLoggedIn] = useState(false);
+    const isOnline = useOnline();
     const {user} = useContext(UserContext);
     const {name} = useContext(NewContext);
     
@@ -30,9 +33,10 @@ export default HeaderComponent = () => {
                 <li className="px-2"><Link to="/about">About</Link></li>
                 <li className="px-2"><Link to="/contact">Contact</Link></li>
                 <li className="px-2"><Link to="/instamart">Instamart</Link></li>
-                <li className="px-2"><Link to="/cart">Cart - {cartItems.length} Items</Link></li>
+                <li className="px-2"><Link data-testid="cart" to="/cart">Cart - {cartItems.length} Items</Link></li>
             </ul>
         </div>
+        <h1 data-testid="isOnline">{isOnline ? "✅" : "🔴"}</h1>
         <span className="p-10 font-bold text-red-900">{user.name}</span>
         <span>{name}</span>
         <div className="py-10">
@@ -40,3 +44,5 @@ export default HeaderComponent = () => {
         </div>
     </div>);
 };
+
+export default HeaderComponent;

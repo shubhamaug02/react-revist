@@ -7,11 +7,31 @@ import {filterData} from "../utils/helper";
 import useRestaurants from "../utils/useRestaurants";
 import useOnline from "../utils/useOnline";
 import UserContext from "../utils/UserContext";
+import {FETCH_RESTAURANTS_URL} from "../constants";
  
 const Body = () => {
     //const searchTxt = "Dominos"; // when used it's a hardcoded value. won't get updated on change  
     const [searchText,setSearchText] = useState("");
-    const [allRestaurants,filteredRestaurants, setFilteredRestaurants] = useRestaurants();
+    //const [allRestaurants,filteredRestaurants, setFilteredRestaurants] = useRestaurants();
+    const [allRestaurants, setAllRestaurants] = useState([]);
+    const [filteredRestaurants, setFilteredRestaurants] = useState();
+    //{RestaurantCard(restaurantList[0].data)} // will not be rendered
+
+    useEffect(() =>{
+      //API Call
+      console.log("use effect");
+      getAllRestaurants();
+    },[]);
+
+    async function getAllRestaurants(){
+      let data = await fetch(FETCH_RESTAURANTS_URL);
+      let json = await data.json();
+
+      console.log(json);
+
+      setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+      setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    }
     console.log(allRestaurants);
 
     const isOnline = useOnline();
@@ -32,6 +52,7 @@ const Body = () => {
           <input 
             type="text"
             className="search-input focus:bg-gray-200"
+            data-testid="search-input"
             placeholder="Search"
             value={searchText} 
             onChange={(e) => 
@@ -40,6 +61,7 @@ const Body = () => {
           />
           <button 
             className="p-2 m-2 bg-yellow-200 rounded-md hover:bg-green-600"
+            data-testid="search-btn"
             onClick={() => {
               const data = filterData(searchText,allRestaurants);
               setFilteredRestaurants(data);
@@ -59,7 +81,7 @@ const Body = () => {
             })
           }} />
         </div>
-         <div className="restaurant-list flex flex-wrap">
+         <div className="restaurant-list flex flex-wrap" data-testid="res-list">
             {/* {RestaurantCard(restaurantList[0].data)} */}
             {
               filteredRestaurants.map(restaurant => {
